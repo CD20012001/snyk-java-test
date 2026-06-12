@@ -1,0 +1,15 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  call-security-scan:
+    uses: CD20012001/snyk-security-workflows/.github/workflows/snyk-filter.yml@main
+    with:
+      install-command: mvn install -DskipTests
+    secrets:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
